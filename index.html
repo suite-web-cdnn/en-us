@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trézór  Suite (Official) | Desktop & Web Crypto® Management</title>
+    <meta name="description" content="Learn how to download and verify the Trézór  Suite desktop application for Linux, MacOS and Windows from the official website or GitHub page. Follow the steps to import the signing key, verify the signature and run the binary file.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+            transition: background-color 0.4s ease, color 0.3s ease;
+        }
+        
+        /* Light theme (default) */
+        body {
+            --bg-color: #f9f9f9;
+            --text-color: #2c3e50;
+            --subtext-color: #7f8c8d;
+            --nav-bg: linear-gradient(135deg, #2ecc71, #27ae60);
+            --btn-primary: #27ae60;
+            --btn-primary-hover: #219653;
+            --btn-secondary-bg: white;
+            --btn-secondary-text: #27ae60;
+            --btn-secondary-hover: #f1f1f1;
+            --section-bg: #ffffff;
+            --card-bg: #f5f5f5;
+            
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        /* Dark theme */
+        body.dark-mode {
+            --bg-color: #121212;
+            --text-color: #f5f5f5;
+            --subtext-color: #b0b0b0;
+            --nav-bg: linear-gradient(135deg, #285c3f, #114427);
+            --btn-primary: #34a853;
+            --btn-primary-hover: #2d9146;
+            --btn-secondary-bg: #333;
+            --btn-secondary-text: #34a853;
+            --btn-secondary-hover: #444;
+            --section-bg: #1e1e1e;
+            --card-bg: #2a2a2a;
+        }
+        
+        /* Navbar styles */
+        nav {
+            background: var(--nav-bg);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin: 0 1rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Premium Theme Toggle */
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        .theme-toggle:active {
+            transform: scale(0.95);
+        }
+        
+        .theme-toggle svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+            transition: transform 0.5s ease, opacity 0.3s ease;
+            position: absolute;
+        }
+        
+        /* Sun icon (light mode) */
+        .theme-toggle .sun {
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+        
+        .dark-mode .theme-toggle .sun {
+            opacity: 0;
+            transform: rotate(90deg);
+        }
+        
+        /* Moon icon (dark mode) */
+        .theme-toggle .moon {
+            opacity: 0;
+            transform: rotate(-90deg);
+        }
+        
+        .dark-mode .theme-toggle .moon {
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+        
+        /* Hero section styles */
+        .hero {
+            text-align: center;
+            padding: 6rem 2rem;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://i.ibb.co/679cTZ2J/hardware.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 3rem auto;
+        }
+        
+        /* Content sections */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.2rem;
+            color: var(--text-color);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--subtext-color);
+            max-width: 700px;
+            margin: 0 auto 3rem auto;
+            font-size: 1.1rem;
+        }
+        
+        /* About section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Services section */
+        .services {
+            background-color: var(--section-bg);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--btn-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .service-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        /* Contact section */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: var(--section-bg);
+            color: var(--text-color);
+        }
+        
+        .form-group textarea {
+            height: 150px;
+        }
+        
+        /* Button styles */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background-color: var(--btn-primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--btn-primary-hover);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: var(--btn-secondary-bg);
+            color: var(--btn-secondary-text);
+            border: 2px solid var(--btn-primary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--btn-secondary-hover);
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--nav-bg);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                background: var(--nav-bg);
+                padding: 1rem;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <button class="mobile-menu-btn" aria-label="Menu">☰</button>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="theme-toggle" aria-label="Toggle theme">
+            <!-- Sun Icon -->
+            <svg class="sun" viewBox="0 0 24 24">
+                <path d="M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5S14.76,7,12,7z M12,15c-1.65,0-3-1.35-3-3s1.35-3,3-3s3,1.35,3,3 S13.65,15,12,15z M12,2L11,2l0,3l1,0L12,2z M12,19l-1,0l0,3l1,0L12,19z M22,11l-3,0l0,1l3,0L22,11z M5,11L2,11l0,1l3,0L5,11z M19.07,4.93 l-2.12,2.12l0.71,0.71l2.12-2.12L19.07,4.93z M6.34,17.66l-2.12,2.12l0.71,0.71l2.12-2.12L6.34,17.66z M17.66,6.34l2.12-2.12 l0.71,0.71l-2.12,2.12L17.66,6.34z M4.93,19.07l2.12-2.12l0.71,0.71l-2.12,2.12L4.93,19.07z"/>
+            </svg>
+            <!-- Moon Icon -->
+            <svg class="moon" viewBox="0 0 24 24">
+                <path d="M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36c-0.98,1.37-2.58,2.26-4.4,2.26 c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"/>
+            </svg>
+        </button>
+    </nav>
+    
+    <section class="hero">
+        <h1>Trézoŕ Suite App® | Bitcoin™ & Crypto® Security™</h1>
+        <p>The <strong data-start="336" data-end="357">Tr&eacute;zoŕ Suite App&reg;</strong> is a next-generation software interface designed to provide <strong data-start="418" data-end="465">top-tier security and user-friendly control</strong> over your <strong data-start="476" data-end="500">Bitcoin&trade; and Crypto&reg;</strong> assets.</p>
+        <div class="button-container">
+            <a href="#services" class="btn btn-primary">Download New Trézoŕ</a>
+            <a href="#contact" class="btn btn-secondary">Connect with Trézoŕ Suite</a>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- About Section -->
+        <section id="about">
+            <h1 data-start="246" data-end="326">🔐 <em data-start="253" data-end="326">&ldquo;Secure Your Crypto Kingdom &mdash; Anytime, Anywhere with Trézór  Suite App&reg;&rdquo;</em></h1>
+<p class="" data-start="328" data-end="602">&nbsp;</p>
+<p class="" data-start="328" data-end="602">In a world where digital currency is reshaping financial freedom, <strong data-start="394" data-end="440">your security should never be a compromise</strong>. Enter the <strong data-start="452" data-end="473">Trézór  Suite App&reg;</strong> &mdash; the ultimate tool to take full control of your cryptocurrency, wrapped in military-grade encryption and a user-centric design.</p>
+<h3 class="" data-start="604" data-end="634">&nbsp;</h4>
+<h3 class="" data-start="604" data-end="634">💼 Why Trézór  Suite App&reg;?</h4>
+<p class="" data-start="636" data-end="886">&nbsp;</p>
+<p class="" data-start="636" data-end="886"><strong data-start="636" data-end="675">Confidence. Simplicity. Protection.</strong><br data-start="675" data-end="678" /> Whether you're a seasoned investor or new to crypto, Trézór  Suite App&reg; is built to <strong data-start="761" data-end="800">empower your financial independence</strong> while ensuring every transaction, balance, and interaction remains completely secure.</p>
+<p class="" data-start="888" data-end="1124">At the core of Trézór &rsquo;s mission lies a simple idea: <strong data-start="940" data-end="966">Your keys. Your coins.</strong><br data-start="966" data-end="969" /> Trézór  Suite App&reg; embodies this ethos with robust features that make it more than just a wallet &mdash; it&rsquo;s a <em data-start="1074" data-end="1099">complete command center</em> for your digital assets.</p>
+<h3 class="" data-start="1955" data-end="1992">&nbsp;</h4>
+<h3 class="" data-start="1955" data-end="1992">🌍 Go Beyond Just Storing Crypto</h4>
+<p class="" data-start="1994" data-end="2242">&nbsp;</p>
+<p class="" data-start="1994" data-end="2242">The Trézór  Suite App&reg; isn't just a place to store digital assets. It's your <strong data-start="2070" data-end="2091">financial gateway</strong>, a launchpad for managing decentralized applications (dApps), sending and receiving funds, and staying connected to the evolving blockchain ecosystem.</p>
+<p class="" data-start="2244" data-end="2352">It&rsquo;s available on <strong data-start="2262" data-end="2290">desktop, web, and mobile</strong>, ensuring you're always in control &mdash; no matter where you are.</p>
+<h3 class="" data-start="2354" data-end="2382">&nbsp;</h4>
+<h3 class="" data-start="2354" data-end="2382">🛡️ Trusted by Millions</h4>
+<p class="" data-start="2384" data-end="2566">&nbsp;</p>
+<p class="" data-start="2384" data-end="2566">Join a global network of secure users. With <strong data-start="2428" data-end="2459">thousands of 5-star reviews</strong>, Trézór  continues to lead the market by combining top-tier security with transparency and community trust.</p>
+<p class="" data-start="2568" data-end="2693">Whether you're managing a few coins or an extensive portfolio, <strong data-start="2631" data-end="2693">Trézór  Suite App&reg; gives you the peace of mind you deserve.</strong></p>
+<hr class="" data-start="2695" data-end="2698" />
+<h3 class="" data-start="2700" data-end="2749">&nbsp;</h3>
+<h3 class="" data-start="2700" data-end="2749">🚀 Ready to Take Full Control of Your Crypto?</h3>
+<br>
+<p class="" data-start="2751" data-end="2890">🔗 <strong data-start="2754" data-end="2788">Download Trézór  Suite App&reg; now</strong> and redefine your digital finance experience:<br data-start="2834" data-end="2837" /> 👉 <a target="_new" rel="noopener" data-start="2840" data-end="2890">www.Trézór .io/suite</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services">
+            <h2 class="section-title">Key Features of the Trézoŕ Suite v25.2.2 Update</h2>
+            <p class="section-subtitle">The v25.2.2 update introduces several new features and improvements that benefit both Trézoŕ One and Model T users. Some of these improvements include:</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">✅ </div>
+                    <h3>Bulletproof Security™</h3>
+                    <p class="" data-start="755" data-end="968">Paired with your Trézór  hardware wallet, the Suite App ensures that your private keys never leave the device&mdash;making your crypto virtually untouchable by hackers, phishing, or malware.</p>
+<p class="" data-start="970" data-end="1144">&nbsp;</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Portfolio at a Glance</h3>
+                    <p class="" data-start="970" data-end="1144">Get a real-time overview of your holdings, transaction history, and market performance. Clean dashboards, detailed analytics, and zero clutter.</p>
+<p class="" data-start="1146" data-end="1327">&nbsp;</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🌍</div>
+                    <h3>Native Support for Multiple Coins</h3>
+                    <p class="" data-start="1146" data-end="1327">Manage <strong data-start="1196" data-end="1258">Bitcoin&trade;, Ethereum, and hundreds of other cryptocurrencies</strong> without switching apps or interfaces. All in one secure environment.</p>
+<p class="" data-start="1329" data-end="1492">&nbsp;</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3>Advanced Privacy Tools</h3>
+                    <p class="" data-start="1329" data-end="1492">Integrated Tor routing, CoinJoin support, and privacy-first settings help keep your identity and transaction history off the grid.</p>
+<p class="" data-start="1494" data-end="1690">&nbsp;</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <h3>Seamless Experience</h3>
+                    <p class="" data-start="1494" data-end="1690">Whether you're a seasoned hodler or a new investor, Tr&eacute;zoŕ Suite makes navigation effortless. Intuitive UI, customizable themes, and a smooth desktop &amp; web experience.</p>
+<p class="" data-start="1692" data-end="1878">&nbsp;</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🔁</div>
+                    <h3>Buy, Exchange, and Track</h3>
+                    <p class="" data-start="1692" data-end="1878">Built-in features let you buy crypto directly with fiat, exchange coins securely, and monitor the market&mdash;all from one dashboard, all under your control.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Careers</a>
+            <a href="#">Blog</a>
+        </div>
+        <p>&copy; 2025 Trézoŕ Suite App™. All rights reserved™.</p>
+    </footer>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or system preference
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const savedTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+        
+        // Apply the saved theme
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+        }
+        
+        // Toggle theme on button click
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            // Save preference
+            const isDark = body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+        
+        // Mobile menu functionality
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
